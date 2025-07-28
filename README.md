@@ -45,5 +45,7 @@ Make sure your IP camera supports `.jpg` snapshot URLs and is accessible from yo
 
 
 ![Alt text](Features.png?raw=true "Feature")
+Features are marked with circles
 
 ![Alt text](Canny.png?raw=true "Feature")
+Imge is converted into sketch 
