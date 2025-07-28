@@ -44,6 +44,6 @@ url = "http://192.168.1.228:8080/shot.jpg"
 Make sure your IP camera supports `.jpg` snapshot URLs and is accessible from your local network.
 
 
-![Alt text](Assets/Features.png?raw=true "Feature")
+![Alt text](Features.png?raw=true "Feature")
 
-![Alt text](Assets/Canny.png?raw=true "Feature")
+![Alt text](Canny.png?raw=true "Feature")
