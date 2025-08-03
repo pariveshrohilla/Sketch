@@ -1,9 +1,11 @@
 import cv2
 import numpy
 import requests
+from datetime import datetime
+
 
 # URL of the IP camera snapshot image
-url = "http://192.168.1.228:8080/shot.jpg"
+url = "http://192.168.1.5:8080/shot.jpg"
 
 PREVIEW  = 0
 BLUR     = 1 
@@ -34,7 +36,7 @@ while alive:
     elif image_filter == CANNY:
         result = cv2.Canny(frame, 80, 150)
     elif image_filter == BLUR:
-        result = cv2.blur(frame, (13, 13))
+        result = cv2.blur(frame, (13, 13))#Can change the intensity of blur here
     elif image_filter == FEATURES:
         result = frame.copy()
         frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -50,7 +52,8 @@ while alive:
         "B: Blur",
         "C: Canny edges",
         "F: Feature detection (corners)",
-        "Q, Esc: Quit program"
+        "Q, Esc: Quit program",
+        "Enter: Save image"
     ]
 
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -79,6 +82,23 @@ while alive:
     elif key == ord("F") or key == ord("f"):
         image_filter = FEATURES
     elif key == ord("P") or key == ord("p"):
-        image_filter = PREVIEW
+        image_filter = PREVIEW 
+    elif key == 13:  # Enter
+    # Get current time as a string
+        timestamp = datetime.now().strftime("%Y_%m_%d~%H_%M_%S")
+       
+        filter_names = {
+            PREVIEW: "preview",
+            BLUR: "blur",
+            CANNY: "canny",
+            FEATURES: "features"
+        }
+        filter_name = filter_names.get(image_filter, "unknown")
+       
+        filename = f"Image_{filter_name}_{timestamp}.jpg"
+       
+        # Save the result frame (with filter applied)
+        cv2.imwrite(filename, result)
+        print(f"Image saved as '{filename}'")
 
 cv2.destroyAllWindows()
